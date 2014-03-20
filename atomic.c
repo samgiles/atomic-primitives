@@ -6,6 +6,19 @@
 #include <libkern/OSAtomic.h>
 #endif
 
+int x86_cas(unsigned long *thevalue, unsigned long oldvalue, unsigned long newvalue) {
+	unsigned long prev;
+	asm volatile("lock;"
+#if defined(__amd64__)
+			"cmpxchgq %1, %2;"
+#else
+			"cmpxchgl %1, %2;"
+#endif
+			: "=a"(prev)
+			: "q"(newvalue), "m"(*thevalue), "a"(oldvalue)
+			: "memory");
+	return prev == oldvalue;
+}
 
 int compare_and_swap_int(int *thevalue, int oldvalue, int newvalue) {
 #ifdef _WIN32

@@ -1,8 +1,8 @@
 CC ?= gcc
 CFLAGS ?= -Wall -O3
 all:
-	$(CC) $(CFLAGS) -g -o cas main.c atomic.c
-	$(CC) $(CFLAGS) -c -S -o atomic.s atomic.c
+	$(CC) $(CFLAGS) -g -o cas main.c
+	$(CC) $(CFLAGS) -c -S -o atomic.s main.c
 
 clean:
 	rm ./cas

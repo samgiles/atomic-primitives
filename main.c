@@ -16,6 +16,16 @@ void test_compare_and_swap_long() {
 	printf("CAS (int): %d\n", cas_result);
 	printf("atomic_counter: %lu\n", *atomic_counter);
 
+    // Simulate another thread advancing the atomic counter by pushing the
+    // oldvalue forward
+    oldvalue = *atomic_counter + 1;
+	newvalue = *atomic_counter + 1;
+
+	cas_result = compare_and_swap(atomic_counter, oldvalue, newvalue);
+
+	printf("CAS (int): %d\n", cas_result);
+	printf("atomic_counter: %lu\n", *atomic_counter);
+
 	free(atomic_counter);
 }
 
@@ -24,6 +34,11 @@ void test_fetch_and_add() {
 	*atomic_counter = 0;
 
 	unsigned long faa_result = fetch_and_add(atomic_counter, 13);
+
+	printf("FAA (int): %lu\n", faa_result);
+	printf("atomic_counter: %lu\n", *atomic_counter);
+
+    faa_result = fetch_and_add(atomic_counter, 13);
 
 	printf("FAA (int): %lu\n", faa_result);
 	printf("atomic_counter: %lu\n", *atomic_counter);

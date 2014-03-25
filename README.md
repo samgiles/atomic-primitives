@@ -22,3 +22,5 @@ The `fetch_and_add(*ptr, value)` implements the FAA atomic primitive. This uses 
 Tested on OS X (Intel \_\_amd64\_\_)
 
 Tested on Windows 7 with MSVC 2k13 _WIN32
+
+Tested on Ubuntu 13.10 (Kernel 3.11.0-12-generic) (Intel x86_64)
